@@ -1,0 +1,95 @@
+/* Create a new database */
+CREATE DATABASE InsuranceManagementSystem;
+USE InsuranceManagementSystem;
+
+/* Create table User */
+CREATE TABLE User (
+    userId INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('Admin', 'Agent', 'Customer') NOT NULL
+);
+
+/* Create table Policy */
+CREATE TABLE Policy (
+    policyId INT PRIMARY KEY AUTO_INCREMENT,
+    policyName VARCHAR(100) NOT NULL UNIQUE,  
+    policyType ENUM('Health', 'Vehicle', 'Life', 'Home') NOT NULL,
+    coverageAmount DECIMAL(10,2) NOT NULL,
+    premiumAmount DECIMAL(10,2) NOT NULL,
+    tenure INT NOT NULL
+);
+
+/* Create table Client (updated policyId -> policy as VARCHAR) */
+CREATE TABLE Client (
+    clientId INT PRIMARY KEY AUTO_INCREMENT,
+    clientName VARCHAR(100) NOT NULL,
+    contactInfo VARCHAR(100),
+    policy VARCHAR(100) -- Now storing policy name as string
+);
+
+/* Create table Claim */
+CREATE TABLE Claim (
+    claimId INT PRIMARY KEY AUTO_INCREMENT,
+    claimNumber VARCHAR(50) UNIQUE NOT NULL,
+    dateFiled DATE NOT NULL,
+    claimAmount DECIMAL(10,2) NOT NULL,
+    status ENUM('Pending', 'Approved', 'Rejected') NOT NULL,
+    policy VARCHAR(100), -- Also changed to policy name
+    clientId INT,
+    FOREIGN KEY (clientId) REFERENCES Client(clientId) ON DELETE CASCADE
+);
+
+/* Create table Payment */
+CREATE TABLE Payment (
+    paymentId INT PRIMARY KEY AUTO_INCREMENT,
+    paymentDate DATE NOT NULL,
+    paymentAmount DECIMAL(10,2) NOT NULL,
+    clientId INT,
+    FOREIGN KEY (clientId) REFERENCES Client(clientId) ON DELETE CASCADE
+);
+
+/* Show all tables */
+SHOW TABLES;
+
+/* Insert into User table */
+INSERT INTO User (username, password, role) VALUES ('admin', 'Admin@100', 'Admin');
+
+/* Insert into Policy table */
+INSERT INTO Policy (policyName, policyType, coverageAmount, premiumAmount, tenure)
+VALUES ('Health Insurance', 'Health', 500000, 12000, 10),
+       ('Car Insurance', 'Vehicle', 200000, 8000, 5),
+       ('Home Insurance', 'Home', 700000, 15000, 15),
+       ('Bike Insurance', 'Vehicle', 100000, 5000, 3);
+
+/* Insert into Client table (policy is now a string) */
+INSERT INTO Client (clientName, contactInfo, policy)
+VALUES ('Akash', 'akash@gmail.com', 'Health Insurance'),  
+       ('Karthick', 'karthick@yahoo.com', 'Car Insurance'),  
+       ('Praneet', 'praneet@outlook.com', 'Home Insurance'),  
+       ('Madhu', 'madhu@hotmail.com', 'Bike Insurance'),  
+       ('Hindu', 'hindu@gmail.com', 'Car Insurance'),  
+       ('Kowsika', 'kowsika@yahoo.com', 'Health Insurance');  
+
+/* Insert into Claim table (policy is now a string) */
+INSERT INTO Claim (claimNumber, dateFiled, claimAmount, status, policy, clientId) 
+VALUES ('CLM1002', '2024-04-02', 75000, 'Approved', 'Car Insurance', 2),
+       ('CLM1003', '2024-03-28', 100000, 'Rejected', 'Home Insurance', 3),
+       ('CLM1004', '2024-03-25', 25000, 'Pending', 'Bike Insurance', 4),
+       ('CLM1005', '2024-04-01', 60000, 'Pending', 'Car Insurance', 5),
+       ('CLM1006', '2024-03-30', 85000, 'Approved', 'Health Insurance', 6);
+
+/* Insert into Payment table */
+INSERT INTO Payment (paymentDate, paymentAmount, clientId)  
+VALUES ('2024-04-01', 12000, 1),  
+       ('2024-04-02', 8000, 2),   
+       ('2024-04-03', 15000, 3),  
+       ('2024-04-04', 5000, 4),   
+       ('2024-04-05', 10000, 5);  
+
+/* Display table data */
+SELECT * FROM User;  
+SELECT * FROM Client;
+SELECT * FROM Claim;
+SELECT * FROM Payment;
+SELECT * FROM Policy;
