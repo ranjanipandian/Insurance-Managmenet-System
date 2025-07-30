@@ -36,7 +36,7 @@ This is a Java-based console application for managing an Insurance Management Sy
 ## 🗂️ Project Structure
 
 
-nsuranceManagementSystem/ │ ├── entity/ │ ├── Client.java │ ├── Policy.java │ ├── Claim.java │ └── Payment.java │ ├── dao/ │ ├── ClientDAO.java │ ├── PolicyDAO.java │ ├── ClaimDAO.java │ └── PaymentDAO.java │ ├── daoImpl/ │ ├── ClientDAOImpl.java │ ├── PolicyDAOImpl.java │ ├── ClaimDAOImpl.java │ └── PaymentDAOImpl.java │ ├── service/ │ ├── InsuranceService.java │ └── InsuranceServiceImpl.java │ ├── util/ │ └── DBConnection.java │ ├── InsuranceManagementMain.java └── README.md
+InsuranceManagementSystem/ │ ├── entity/ │ ├── Client.java │ ├── Policy.java │ ├── Claim.java │ └── Payment.java │ ├── dao/ │ ├── ClientDAO.java │ ├── PolicyDAO.java │ ├── ClaimDAO.java │ └── PaymentDAO.java │ ├── daoImpl/ │ ├── ClientDAOImpl.java │ ├── PolicyDAOImpl.java │ ├── ClaimDAOImpl.java │ └── PaymentDAOImpl.java │ ├── service/ │ ├── InsuranceService.java │ └── InsuranceServiceImpl.java │ ├── util/ │ └── DBConnection.java │ ├── InsuranceManagementMain.java └── README.md
 
 
 
